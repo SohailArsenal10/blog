@@ -1,0 +1,91 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<br />
+<h2 style="text-align: left;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #990000;"> &nbsp;<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">User Agents</span></span></h2>
+<div>
+<span style="color: #990000;"><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br /></span></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp;As I mentioned in the previous post that a&nbsp;</span><b style="background-color: white; color: #222222; font-family: arial, sans-serif; font-size: 16px;">browser's user agent</b><span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp; is a string which&nbsp;</span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp;helps identify which&nbsp;</span><b style="background-color: white; color: #222222; font-family: arial, sans-serif; font-size: 16px;">browser</b><span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp;is being used, what version, and on which&nbsp; operating&nbsp;</span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp;&nbsp;</span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp;system it is on. So if you try to scrape data intensively using your same User Agent&nbsp;</span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp;then the defensive intelligent robots may know and block you from scraping data.</span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , sans-serif; font-size: 16px;">&nbsp; &nbsp; </span><span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>Let us consider the code below:</b></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -&nbsp;</b></span></span><br />
+<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="color: navy; font-weight: bold;">from </span><span style="background-color: white;">bs4 </span><span style="color: navy; font-weight: bold;">import </span><span style="background-color: white;">BeautifulSoup </span><span style="color: navy; font-weight: bold;">as </span><span style="background-color: white;">soup</span></span><br />
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="color: navy; font-weight: bold;">import </span>requests
+<span style="color: navy; font-weight: bold;">import </span>pandas <span style="color: navy; font-weight: bold;">as </span>pd
+<span style="color: navy; font-weight: bold;">from </span>pandas <span style="color: navy; font-weight: bold;">import </span>ExcelWriter
+
+headers = {<span style="color: teal; font-weight: bold;">'User-Agent'</span>: <span style="color: teal; font-weight: bold;">'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'</span>}
+url1 = <span style="color: teal; font-weight: bold;">"https://www.espn.in/football/team/stats/_/id/364/season/2018"</span>url2 = <span style="color: teal; font-weight: bold;">"https://www.espn.in/football/team/stats/_/id/364/league/ENG.1/season/2018/view/discipline"</span><span style="color: teal; font-weight: bold;">
+</span>req1 = requests.get(url1, <span style="color: #660099;">headers</span>=headers)
+req2 = requests.get(url2, <span style="color: #660099;">headers</span>=headers)
+
+<span style="color: navy;">print</span>(req1.status_code)       <span style="color: grey; font-style: italic;">#Tells you about the status code of the file i.e whether the file has been downloaded or not</span><span style="color: navy;">print</span>(req2.status_code)
+
+
+page_html1 = req1.text
+page_html2 = req2.text
+
+page_soup1 = soup(page_html1, <span style="color: teal; font-weight: bold;">"html.parser"</span>)
+page_soup2 = soup(page_html2, <span style="color: teal; font-weight: bold;">"html.parser"</span>)
+
+table1 = page_soup1.findAll(<span style="color: teal; font-weight: bold;">"div"</span>, {<span style="color: teal; font-weight: bold;">"class"</span>: <span style="color: teal; font-weight: bold;">"InnerLayout__child flex"</span>})</span></pre>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>print(table1)</b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif; font-weight: bold;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -&nbsp; &nbsp;</span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> As you can see in the above code that I have used a different User Agent in headers and&nbsp; &nbsp;</span></span></span><br />
+<br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp; used that to get the page, the robot(defense code) of the particular website would&nbsp;</span></span></span><br />
+<br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp; recognize me as a different user and allow me to scrape information. So it is necessary&nbsp;</span></span></span><br />
+<br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp; that you try to change the User Agent frequently if you try to scrape data from the same&nbsp;</span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp; website again and again. The status code should return you 200 upon successful&nbsp;</span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp;&nbsp;</span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&nbsp;downloading of web page otherwise&nbsp; it would return 404.&nbsp;</span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span></span></span>
+<span style="background-color: white; font-size: 16px;"><span style="color: orange; font-family: &quot;trebuchet ms&quot; , sans-serif;">To help you guys I have considered these helpful User Agents below:&nbsp;</span></span><br />
+<span style="background-color: white; font-size: 16px;"><span style="color: orange; font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></span>
+<span style="background-color: white; font-size: 16px;"><span style="color: orange; font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="color: #616464; font-family: &quot;lato&quot; , sans-serif; font-size: 16.2px; font-weight: 700; letter-spacing: 0.2px;">1. Chrome OS-based laptop using Chrome browser&nbsp;</span></span></span><br />
+<span style="background-color: white; font-size: 16px;"><span style="color: orange; font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b><br /></b></span></span></span>
+<span style="background-color: white; font-size: 16px;"><span style="color: orange; font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36</b></span></span></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>2.&nbsp;</b></span></span><span style="color: #616464; font-family: &quot;lato&quot; , sans-serif; font-size: 16.2px; font-weight: 700; letter-spacing: 0.2px;">Linux-based PC using a Firefox browser</span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1</b></span></span></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>3.&nbsp;</b></span></span><span style="color: #616464; font-family: &quot;lato&quot; , sans-serif; font-size: 16.2px; font-weight: 700; letter-spacing: 0.2px;">Windows 10-based PC using Edge browser</span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246</b></span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b><br /></b></span></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>4.&nbsp;</b></span></span></span><span style="color: #616464; font-family: &quot;lato&quot; , sans-serif; font-size: 16.2px; font-weight: 700; letter-spacing: 0.2px;">Apple iPhone User Agent</span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b><br /></b></span></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1</b></span></span></span></div>
+<div>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>5.&nbsp;</b></span></span><span style="color: #616464; font-family: &quot;lato&quot; , sans-serif; font-size: 16.2px; font-weight: 700; letter-spacing: 0.2px;">Samsung Galaxy S9(Android based)</span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><br /></b></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b>Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36</b></span></span></span><br />
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;"><b><br /></b></span></span></span>
+<span style="background-color: white; color: #222222; font-size: 16px;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="background-color: #f9f9f9; color: #616464; font-size: 16.2px; letter-spacing: 0.2px;">So have a go at any of these and you are good to go. Cheers!!!</span></span></span></div>
+</div>
