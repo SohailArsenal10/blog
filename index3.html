@@ -1,0 +1,118 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<h2 style="text-align: left;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #990000; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">What is Data Scraping?</span></h2>
+<div>
+<span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;">Data scraping, also known as&nbsp;</span><a href="https://en.wikipedia.org/wiki/Data_scraping" rel="noopener noreferrer" style="background-color: white; box-sizing: border-box; color: #db6d3b; font-family: &quot;PT Sans&quot;, sans-serif; font-size: 17px; margin: 0px; outline: 0px !important; padding: 0px; text-decoration-line: none; text-size-adjust: none; transition: all 0.3s ease 0s;" target="_blank">web scraping</a><span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;">, is the process of importing information from a website into a spreadsheet or local file saved on your computer.&nbsp;Well the data can be both static and dynamic but it does not matter until the website which is specified is wrong.</span></div>
+<div>
+<span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;"><br /></span></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://1.bp.blogspot.com/-Wv5-ZEdK1og/XXy46UojKuI/AAAAAAAAADs/Qyyg1ZisjTMPXF-W8Cd0C0iJkOX8PBheACLcBGAsYHQ/s1600/Screenshot%2B%252854%2529.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="844" data-original-width="1500" height="225" src="https://1.bp.blogspot.com/-Wv5-ZEdK1og/XXy46UojKuI/AAAAAAAAADs/Qyyg1ZisjTMPXF-W8Cd0C0iJkOX8PBheACLcBGAsYHQ/s400/Screenshot%2B%252854%2529.png" width="400" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>Some domains of web scraping</i></b></span></td></tr>
+</tbody></table>
+<div>
+<span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;"><br /></span></div>
+<div>
+<span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;">&nbsp; &nbsp; &nbsp; &nbsp;Well web scraping can be obtained by programming as well as using already&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; available software tools but if we were to work without getting charged then&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; programming is a way to go because we need to pay to get those tools.The&nbsp;</span><br />
+<span style="background-color: white; color: #2a2a2a; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;">&nbsp; &nbsp; &nbsp; programming language which is widely used for scraping is </span><span style="color: red;"><span style="background-color: white; font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: 17px;"><b><i>Python</i></b></span><span style="background-color: white; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;">.</span></span><br />
+<span style="color: red;"><span style="background-color: white; font-family: &quot;pt sans&quot; , sans-serif; font-size: 17px;"><br /></span></span>
+<span style="background-color: white; font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: 17px;"><b><i>Let us look at the code below:</i></b></span><br />
+<span style="background-color: white; font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: 17px;"><b><i>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -&nbsp;&nbsp;</i></b></span><br />
+<span style="background-color: white; font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: 17px;"></span><br />
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><span style="color: navy; font-weight: bold;">from </span>bs4 <span style="color: navy; font-weight: bold;">import </span>BeautifulSoup <span style="color: navy; font-weight: bold;">as </span>soup
+<span style="color: navy; font-weight: bold;">from </span>urllib.request <span style="color: navy; font-weight: bold;">import </span>urlopen <span style="color: navy; font-weight: bold;">as </span>uReq
+
+myurl = <span style="color: teal; font-weight: bold;">'https://www.flipkart.com/search?q=iphone&amp;otracker=start&amp;as-show=on&amp;as=off'</span><span style="color: teal; font-weight: bold;">
+</span>uClient = uReq(myurl)
+page_html = uClient.read()
+uClient.close()
+page_soup=soup(page_html,<span style="color: teal; font-weight: bold;">"html.parser"</span>)
+
+containers=page_soup.findAll(<span style="color: teal; font-weight: bold;">"div"</span>,{<span style="color: teal; font-weight: bold;">"class"</span>:<span style="color: teal; font-weight: bold;">"bhgxx2 col-12-12"</span>})
+<span style="color: navy;">print</span>(<span style="color: navy;">len</span>(containers))
+
+<span style="color: teal; font-weight: bold;">filename="products.csv"</span><span style="color: teal; font-weight: bold;">f=open(filename,"w")</span><span style="color: teal; font-weight: bold;">
+</span><span style="color: teal; font-weight: bold;">headers="Product_name,Pricing,Rating</span><span style="color: navy; font-weight: bold;">\n</span><span style="color: teal; font-weight: bold;">"</span><span style="color: teal; font-weight: bold;">f.write(headers)</span><span style="color: teal; font-weight: bold;">
+</span><span style="color: navy; font-weight: bold;">for </span>container <span style="color: navy; font-weight: bold;">in </span>containers:
+    product_name=container.findAll(<span style="color: teal; font-weight: bold;">"div"</span>,{<span style="color: teal; font-weight: bold;">"class"</span>:<span style="color: teal; font-weight: bold;">"col col-7-12"</span>})  <span style="color: grey; font-style: italic;">#Finding given class in each container</span><span style="color: grey; font-style: italic;">
+</span><span style="color: grey; font-style: italic;">
+</span><span style="color: grey; font-style: italic;">    </span>price_container = container.findAll(<span style="color: teal; font-weight: bold;">"div"</span>,{<span style="color: teal; font-weight: bold;">"class"</span>:<span style="color: teal; font-weight: bold;">"col col-5-12 _2o7WAb"</span>})
+
+
+    rating_container=container.findAll(<span style="color: teal; font-weight: bold;">"div"</span>,{<span style="color: teal; font-weight: bold;">"class"</span>:<span style="color: teal; font-weight: bold;">"niH0FQ"</span>})
+    <span style="color: navy;">print</span>(rating_container[<span style="color: blue;">0</span>].text)
+
+<span style="color: teal; font-weight: bold;">
+</span><span style="color: teal; font-weight: bold;">    print("product_name:" + name)</span><span style="color: teal; font-weight: bold;">    print("price:" + price)</span><span style="color: teal; font-weight: bold;">    print("ratings:" + rating)</span></span><span style="font-family: &quot;courier new&quot;; font-size: 9pt;">
+</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;courier new&quot;; font-size: 9pt;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">The above code scrapes data from flipkart website aforementioned in the url.</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">
+</span></pre>
+<h3 style="background-color: white; text-align: left;">
+<span style="color: #cc0000; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Explanation:</span></h3>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">uReq(an alias name taken for urlopen)- Used to download a webpage virtually.</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">soup()- Converts the webpage to set of HTML tags.</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">findAll()- Finds all the tags mentioned in the method.</span></pre>
+<pre style="background-color: white;"><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;">Note: </span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">We need to know HTML tags before knowing how to  do Web Scraping.</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">
+</span></pre>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">
+</span></pre>
+<h3 style="background-color: white; text-align: left;">
+<span style="color: #3d85c6; font-family: &quot;trebuchet ms&quot; , sans-serif;">Can we scrape data from any website?</span></h3>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>No my friend...this is not possible with every website as some of the popular websites have defense intelligence robots(a piece of code) to check who are trying to visit and scrape data</i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>from the website. To avoid this we have to change User Agents when we scrape the same website for more number of times or we scrape some high security websites.</i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><br /></i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>Now...what is a User Agent?&nbsp;</i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>A User Agent is a "string" which is used to tell the server what kind of&nbsp; a browser,what version and what device the request is coming from. So we can fool the server/robot</i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>by mentioning another User Agent in our url.</i></span></div>
+<div>
+<span style="color: #660000; font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><br /></i></span></div>
+<div>
+<i><span style="color: magenta; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>To know more about User Agent&nbsp; <a href="https://sohailblogger9.blogspot.com/2019/09/how-to-use-user-agents-while-scraping.html" target="_blank">CLICK HERE!!!</a></b></span></i><br />
+<i><span style="color: magenta; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><br /></b></span></i>
+<br />
+<h3 style="text-align: left;">
+<i><span style="color: #38761d; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>Where is the data stored?</b></span></i></h3>
+</div>
+<div>
+<i><span style="color: magenta; font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">The scraped data can be stored in relational databases as well as normal files in forms like CSV,Excel spreadsheet etc.</span></i></div>
+<div>
+<i><span style="color: magenta; font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span></i></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i style="font-family: &quot;Times New Roman&quot;;"><span style="color: #e06666; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>To know more about storing data&nbsp; <a href="https://sohailblogger9.blogspot.com/2019/09/how-to-store-data-after-scraping-it.html" target="_blank">CLICK HERE!!!</a></b></span></i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><br /></i></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><br /></i></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>As for the people who are not interested in programming,fortunately there are tools available</i></span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>which are listed below.</i></span></div>
+<div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>&nbsp; &nbsp;&nbsp;</i></span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>&nbsp; &nbsp; &nbsp; &nbsp;</i></span><br />
+<h3 style="clear: both; text-align: center;">
+<span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Best Data Scraping Tools Available</span></h3>
+<div>
+<span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #cc0000; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">(Just click on the below links to continue)</span><br />
+<span style="color: #cc0000; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br /></span>
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>1. <a href="https://www.scraperapi.com/" target="_blank">Scraper API&nbsp;</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6. <a href="https://www.diffbot.com/" target="_blank">Diffbot</a></i></b></span><br />
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i><br /></i></b></span>
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>2. <a href="https://80legs.com/" target="_blank">80 legs&nbsp;</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7. <a href="http://import.io/">Import.io</a></i></b></span><br />
+<br />
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>3. <a href="https://www.octoparse.com/" target="_blank">Octoparse&nbsp;</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8. <a href="https://dexi.io/" target="_blank">Dexi Intelligent</a></i></b></span><br />
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i><br /></i></b></span>
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>4. <a href="https://www.parsehub.com/" target="_blank">ParseHub&nbsp;</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9. <a href="http://webhose.io/">Webhose.io</a></i></b></span><br />
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i><br /></i></b></span>
+<span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b><i>5. <a href="https://scrapy.org/" target="_blank">Scrapy&nbsp;&nbsp;</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 10. <a href="https://www.spinn3r.com/" target="_blank">Spinn3r</a></i></b></span></div>
+</div>
+<div>
+<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><i><b><br /></b></i></span></div>
+<pre style="background-color: white;"><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">
+</span></pre>
+</div>
+</div>
